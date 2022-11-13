@@ -1,27 +1,43 @@
-const express = require("express");
-const cors = require("cors");
-const dotenv = require("dotenv");
-dotenv.config();
 const path = require("path");
+const express = require("express");
+const dotenv = require("dotenv");
+const cors = require("cors");
 
-// App Middleware
-const app = express();
-app.use(express.json());
-app.use(cors());
+// Config env variables
+dotenv.config();
 
 // Connection to MongoDB
 const connectToMongo = require("./db");
 connectToMongo();
 
+// App Middleware
+const app = express();
+
+// Required headers
+const headers = function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, DELETE, POST");
+  res.header("Access-Control-Allow-Headers", "Content-type");
+  next();
+};
+
+// App Cors
+app.use(
+  cors({
+    allowedHeaders: app.use(headers),
+  })
+);
+
+// Use JSON
+app.use(express.json());
+
 // Available Routes
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/articles", require("./routes/articles"));
 
-const __dirname = path.resolve();
-
-// Heroku Production
+// Server Production
 if (process.env.NODE_ENV == "production") {
-  app.use(express.static(path.join(__dirname, "/frontend/build")));
+  app.use(express.static("/frontend/build"));
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
   });
