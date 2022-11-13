@@ -20,7 +20,7 @@ function AddArticle() {
       article.comment
     );
     setArticle({ article_ID: "", link: "", status: "", comment: "" });
-    alert("Article Updated Successfully");
+    alert("Article Added Successfully");
     e.preventDefault();
   };
 

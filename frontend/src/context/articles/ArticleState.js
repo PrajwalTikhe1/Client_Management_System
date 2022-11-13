@@ -61,7 +61,6 @@ const ArticleState = (props) => {
       },
     });
     const json = await response.json();
-    console.log(json);
     const newArticles = articles.filter((article) => {
       return article._id !== id;
     });
