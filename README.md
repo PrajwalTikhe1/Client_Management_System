@@ -2,6 +2,8 @@
 
 Client management systems allow managers to seamlessly manage their relationships with potential and existing employees and thier articles.
 
+<img width="960" alt="Screenshot 2022-11-14 034127" src="https://user-images.githubusercontent.com/72973991/201547154-58b4da51-3553-451d-8dd5-00d445f5f15a.png">
+
 ## Installation
 
 Use the package manager [npm](https://docs.npmjs.com/cli/v8/commands/npm-install) to install.
